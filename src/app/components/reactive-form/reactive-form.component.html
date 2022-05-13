@@ -1,0 +1,30 @@
+<form class="form-reactive row g-3 p-5 needs-validation" [formGroup]="reactiveForm" (ngSubmit)="onSubmit()" novalidate>
+
+  <div class="mb-3 row">
+    <label for="input-Words-Area" class="form-label">Story</label>
+    <textarea id="input-Words-Area" type="text"
+      [ngClass]="{
+        'is-invalid': !reactiveForm.get('inputWordsArea')?.valid && reactiveForm.get('inputWordsArea')?.touched,
+        'is-valid': reactiveForm.get('inputWordsArea')?.valid && reactiveForm.get('inputWordsArea')?.touched
+      }"
+      formControlName="inputWordsArea" class="form-control" rows="15" spellcheck="false" required></textarea>
+    <div class="small text-muted text-end">{{reactiveForm.get('inputWordsArea')?.value | charCount}}</div>
+    <div *ngIf="reactiveForm.get('inputWordsArea')?.errors?.['required']" class="invalid-feedback">This is required.</div>
+  </div>
+
+  <div class="mb-3 row has-validation">
+    <label for="url-Words" class="form-label">Url</label>
+    <input id="url-Words" type="text"
+      [ngClass]="{
+        'is-invalid': !reactiveForm.get('urlWords')?.valid,
+        'is-valid': reactiveForm.get('urlWords')?.value.length > 0 && reactiveForm.get('urlWords')?.valid && reactiveForm.get('inputWordsArea')?.touched
+      }"
+      formControlName="urlWords" class="form-control">
+    <div *ngIf="!reactiveForm.get('urlWords')?.valid" class="invalid-feedback">Enter a valid Url.</div>
+  </div>
+
+  <div class="mb-3 row">
+    <button type="submit" class="btn btn-primary mb-3" [disabled]="!reactiveForm.valid">Submit</button>
+  </div>
+
+</form>
