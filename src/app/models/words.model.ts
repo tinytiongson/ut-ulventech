@@ -1,4 +1,4 @@
 export interface WordsModel {
-  Story?: string
-  Url?: string
+  story?: string
+  url?: string
 }
