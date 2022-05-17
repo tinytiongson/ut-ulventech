@@ -31,10 +31,10 @@ export class WordsFacade implements OnDestroy {
   public getGridData(): Observable<WordCountGridModel> {
     return this.words$.pipe(
       switchMap((words) => {
-        return this.wordService.getUrlData(words.Url).pipe(
+        return this.wordService.getUrlData(words.url).pipe(
           switchMap((urlData: UrlDataModel) => {
             let description = urlData?.description;
-            let wordCount: WordCountModel[] = StringUtilities.countWords([words.Story ?? '', description], 10);
+            let wordCount: WordCountModel[] = StringUtilities.countWords([words.story ?? '', description], 10);
             let wordCountGridModel: WordCountGridModel = { isloading: false, wordcounts: wordCount};
             return of(wordCountGridModel);
           }),
